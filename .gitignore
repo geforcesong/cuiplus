@@ -1,0 +1,11 @@
+node_modules
+logs
+dist
+.vscode
+.DS_Store
+*.map
+npm-debug.log
+public/*.js
+public/*.css
+public/*.woff
+public/*.ttf
