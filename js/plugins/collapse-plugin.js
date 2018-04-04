@@ -15,7 +15,16 @@ class Collapse extends PlugInBase {
                 $this.attr('data-collapse-load', '');
             });
         });
-        console.log('init finished!');
+    }
+
+    createPlugIn() {
+        if (!$.fn[this.name]) {
+            $.fn[this.name] = function (data) {
+                this.click(function () {
+                    $(data.target).slideToggle();
+                });
+            };
+        }
     }
 }
 

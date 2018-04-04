@@ -11,18 +11,14 @@ class PlugInBase {
     }
 
     register() {
-        PlugInBase._registerInJquery(this.name);
+        this.createPlugIn();
         PlugInManager.trigger('cui.init.before.' + this.name);
         this.init();
         PlugInManager.trigger('cui.init.after.' + this.name);
     }
 
-    static _registerInJquery(name) {
-        if (!$.fn[name]) {
-            $.fn[name] = function () {
-                return this;
-            };
-        }
+    createPlugIn() {
+        throw new Error(`Plugin ${this.name} is not created.`);
     }
 }
 
