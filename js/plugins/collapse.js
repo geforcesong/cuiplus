@@ -27,6 +27,10 @@ class Collapse extends PlugInBase {
         });
     }
 
+    hello(){
+        console.log('sdfs');
+    }
+
     init(context) {
         var opt = context.opt;
         var $this = context.$element;
