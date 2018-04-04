@@ -29,10 +29,13 @@ class PlugInFactory {
                 exports: {},
                 isThirdPart: false
             }, pluginContext);
+            
             context.options = options;
+            context.init = pluginContext.init;
+            context.initAfter = pluginContext.initAfter;
             context.$element = $this;
             var excutePlugin = function () {
-                var obj = $.proxy(that.create, this)(context);
+                var obj = $.proxy(that.create, that)(context);
                 $this.data(name, obj);
                 return obj;
             };
