@@ -1,9 +1,10 @@
 {
   "presets": [
-    ["es2015", {"modules": false}]
-  ],
-  "plugins": [
-      "syntax-dynamic-import",
-      "transform-object-rest-spread"
-      ]
+    [
+      "es2015",
+      {
+        "modules": false
+      }
+    ]
+  ]
 }

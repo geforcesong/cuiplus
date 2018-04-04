@@ -4,7 +4,7 @@
   "description": "A modularized CUI",
   "main": "index.js",
   "scripts": {
-    "start": "light-server -s . -p 7000",
+    "start": "webpack -d && light-server -s . -p 7000",
     "build": "webpack"
   },
   "repository": {

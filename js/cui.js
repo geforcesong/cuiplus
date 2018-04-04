@@ -1,7 +1,1 @@
-class Student {
-    constructor() {
-        console.log('hello, stu');
-    }
-}
-
-export default Student;
+import Collapse from './plugins/collapse.js';
