@@ -15,29 +15,7 @@ class Collapse extends PlugInBase {
             hidebefore: null,
             hideafter: null
         };
-
-        this.exports = {
-            show: function () {
-                var opt = this.opt;
-                opt.showbefore && $.CUI.trigger(opt.showbefore, this);
-                this._show();
-                opt.showafter && $.CUI.trigger(opt.showafter, this);
-            },
-            hide: function () {
-                var opt = this.opt;
-                opt.hidebefore && $.CUI.trigger(opt.hidebefore, this);
-                this._hide();
-                opt.hideafter && $.CUI.trigger(opt.hideafter, this);
-            },
-            toggle: function () {
-                if (this.$element.hasClass('shown')) {
-                    this._hide();
-                } else {
-                    this._show();
-                }
-            }
-        }
-
+        this.exports = ['_show', '_hide', '_toggle'];
         PlugInFactory.plugin(this);
         $(document).on('dom.load.collapse', function () {
             $('[data-collapse]').each(function (index, item) {
@@ -49,7 +27,7 @@ class Collapse extends PlugInBase {
             });
         });
     }
-    
+
     init(context) {
         var opt = context.opt;
         var $this = context.$element;
@@ -110,13 +88,19 @@ class Collapse extends PlugInBase {
                 _hidetext();
             };
         }
+        context._toggle = function () {
+            if ($this.hasClass('shown')) {
+                context._hide();
+            } else {
+                context._show();
+            }
+        }
     }
 
-    initAfter (context) {
+    initAfter(context) {
         var $this = context.$element;
         var $target = context.$target;
         var opt = context.opt;
-        var exports = context.exports;
         var _resetForExpand = function () {
             if (!$this.hasClass('shown')) {
                 if ($target.prop('scrollHeight') > $target.prop('offsetHeight')) {
@@ -132,12 +116,12 @@ class Collapse extends PlugInBase {
         }
         if (!opt.isexpand) {
             if ($target.is(':hidden')) {
-                exports.hide();
+                context._hide();
             } else {
-                exports.show();
+                context._show();
             }
         }
-        $this.on('click.collapse', exports.toggle);
+        $this.on('click.collapse', context._toggle);
     }
 }
 

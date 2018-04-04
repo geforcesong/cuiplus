@@ -26,10 +26,9 @@ class PlugInFactory {
                 setOptionsBefore: null,
                 setOptionsAfter: null,
                 destroyBefore: null,
-                exports: {},
                 isThirdPart: false
             }, pluginContext);
-            
+
             context.options = options;
             context.init = pluginContext.init;
             context.initAfter = pluginContext.initAfter;
@@ -48,7 +47,7 @@ class PlugInFactory {
         var that = this;
         context.opt = $.extend(true, {}, context.defaultOpt, context.options);
         $.proxy(this.handleInit, that)(context);
-        return context.exports;
+        return context;
     }
 
     handleOptions(context) {
@@ -63,7 +62,6 @@ class PlugInFactory {
     handleInit(context) {
         var that = this;
         var opt = context.opt;
-        context.exports = context.exports || {};
 
         //before plugin initial event
         this.trigger('cui.init.before.' + context.name, context);
@@ -74,22 +72,22 @@ class PlugInFactory {
         context.init && $.proxy(context.init, that)(context);
 
         //is third part plugin
-        if (context.isThirdPart && context.exports.original) {
-            context.exports.original = $.isFunction(context.exports.original) ? $.proxy(context.exports.original, context)() : context.exports.original;
+        if (context.isThirdPart && context.original) {
+            context.original = $.isFunction(context.original) ? $.proxy(context.original, context)() : context.original;
         } else {
             //add exports for the plugin
             $.proxy(that.handleExports, that)(context);
 
             //initial get options of plugin
-            context.exports.getOptions = function () {
+            context.getOptions = function () {
                 return opt;
             };
 
             //initial set options of plugin
-            context.exports.setOptions = $.proxy(that.handleOptions, that)(context);
+            context.setOptions = $.proxy(that.handleOptions, that)(context);
 
             //destroy export for the plugin
-            context.exports.destroy = $.proxy(that.handleDestroy, that)(context);
+            context.destroy = $.proxy(that.handleDestroy, that)(context);
         }
 
         //after plugin initial custom event
@@ -113,12 +111,12 @@ class PlugInFactory {
     }
 
     handleExports(context) {
-        if (context.exports) {
+        if (context.exports && context.exports.length) {
             var obj = {};
-            $.each(context.exports, function (key, value) {
-                if ($.isFunction(value)) {
+            $.each(context.exports, function (index,key) {
+                if ($.isFunction(context[key])) {
                     //export method for the plugin
-                    obj[key] = $.proxy(value, context);
+                    obj[key] = $.proxy(context[key], context);
                 }
             });
             obj.name = context.name;
