@@ -1,1 +1,2 @@
-import Collapse from './plugins/collapse.js';
+import Collapse from './plugins/collapse-plugin.js';
+(new Collapse()).register();
