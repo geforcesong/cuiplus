@@ -20,15 +20,16 @@ class Collapse extends PlugInBase {
     createPlugIn() {
         const that = this;
         if (!$.fn[this.name]) {
-            $.fn[this.name] = function (data) {
+            $.fn[this.name] = function (dataOpt) {
                 this.click(function () {
-                    that.toggle($(this), $(data.target));
+                    that.toggle($(this), dataOpt);
                 });
             };
         }
     }
 
-    toggle($this, $target) {
+    toggle($this, dataOpt) {
+        const $target = $(dataOpt.target);
         let height = 0;
         if ($target.offset() && $target.offset().top < $this.offset().top) {
             height = $target.height();
@@ -39,9 +40,15 @@ class Collapse extends PlugInBase {
             if (height && height > 0) {
                 $(document).scrollTop($(document).scrollTop() - height);
             }
+            if (dataOpt.showtext) {
+                $this.html(dataOpt.showtext);
+            }
         } else {
             $this.addClass('shown');
             $target.show();
+            if (dataOpt.hidetext) {
+                $this.html(dataOpt.hidetext);
+            }
         }
     }
 }
