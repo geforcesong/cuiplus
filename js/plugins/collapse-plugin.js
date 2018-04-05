@@ -18,12 +18,30 @@ class Collapse extends PlugInBase {
     }
 
     createPlugIn() {
+        const that = this;
         if (!$.fn[this.name]) {
             $.fn[this.name] = function (data) {
                 this.click(function () {
-                    $(data.target).slideToggle();
+                    that.toggle($(this), $(data.target));
                 });
             };
+        }
+    }
+
+    toggle($this, $target) {
+        let height = 0;
+        if ($target.offset() && $target.offset().top < $this.offset().top) {
+            height = $target.height();
+        }
+        if ($this.hasClass('shown')) {
+            $this.removeClass('shown');
+            $target.hide();
+            if (height && height > 0) {
+                $(document).scrollTop($(document).scrollTop() - height);
+            }
+        } else {
+            $this.addClass('shown');
+            $target.show();
         }
     }
 }
