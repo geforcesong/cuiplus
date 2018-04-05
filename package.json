@@ -4,7 +4,7 @@
   "description": "A modularized CUI",
   "main": "index.js",
   "scripts": {
-    "start": "webpack -d && light-server -s . -p 7000",
+    "start": "concurrently \"webpack -d --watch\" \"light-server -s . -p 7000\" ",
     "build": "webpack"
   },
   "repository": {
@@ -27,6 +27,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-es2015": "^6.24.1",
+    "concurrently": "^3.5.1",
     "css-loader": "^0.28.11",
     "eslint": "^4.10.0",
     "expose-loader": "^0.7.5",
