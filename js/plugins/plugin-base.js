@@ -1,5 +1,3 @@
-import PlugInManager from './plugin-manager.js';
-
 class PlugInBase {
     constructor(name) {
         this.name = name;
@@ -12,13 +10,17 @@ class PlugInBase {
 
     register() {
         this.createPlugIn();
-        PlugInManager.trigger('cui.init.before.' + this.name);
+        this.trigger('cui.init.before.' + this.name);
         this.init();
-        PlugInManager.trigger('cui.init.after.' + this.name);
+        this.trigger('cui.init.after.' + this.name);
     }
 
     createPlugIn() {
         throw new Error(`Plugin ${this.name} is not created.`);
+    }
+
+    trigger(name, params) {
+        $(document).trigger(name, params);
     }
 }
 
