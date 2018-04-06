@@ -9,7 +9,8 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'public'),
-        filename: `[name].${pkg.version}.js`
+        filename: `[name].${pkg.version}.js`,
+        publicPath: '/dist/'
     },
     module: {
         rules: [
@@ -41,6 +42,15 @@ module.exports = {
                     loader: 'expose-loader',
                     options: '$'
                 }]
+            },
+            {
+                test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)\w*/,
+                use: {
+                    loader: 'file-loader',
+                    query: {
+                        name: 'assets/[name].[ext]'
+                    }
+                }
             }
         ]
     },
