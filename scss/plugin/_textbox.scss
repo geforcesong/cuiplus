@@ -1,0 +1,178 @@
+[data-textbox], [data-textbox-load] {
+    position: relative;
+    input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+        color: transparent;
+    }
+    input:-moz-placeholder, textarea:-moz-placeholder {
+        color: transparent;
+    }
+    input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+        color: transparent;
+    }
+    .input, .textarea {
+        >label {
+            margin: 0;
+            position: absolute;
+            line-height: 20px;
+            height: 20px;
+            transform: translateY(-50%);
+            padding: 0 2px;
+            border: none;
+            font-size: $font-size-5;
+            z-index: 1;
+            opacity: 0.5;
+            text-align: left;
+            @extend %singleline;
+            transition: all .2s ease-in-out;
+        }
+        .tooltip.error {
+            top: 0 !important;
+            right: 0 !important;
+            left: auto !important;
+            .tooltip-inner {
+                text-align: right;
+            }
+            transform: translateY(0) !important;
+        }
+    }
+    .input {
+        >label {
+            left: 10px;
+            right: auto;
+            top: 50%;
+            width: calc(100% - 10px);
+        }
+        &.right, &.left {
+            >label {
+                width: calc(100% - 40px);
+            }
+        }
+        &.right.left {
+            >label {
+                width: calc(100% - 70px);
+            }
+        }
+        >input {
+            padding: 15px 10px 0 10px;
+        }
+        >i {
+            line-height: 38px;
+        }
+        >a {
+            line-height: 52px;
+        }
+        &.large {
+            >label {
+                right: auto;
+                top: 50%;
+                font-size: 18px;
+            }
+            >input {
+                padding: 15px 10px 0 10px;
+            }
+            >i {
+                font-size: 18px;
+                line-height: $form-size-large;
+            }
+            >a {
+                line-height: $form-size-large;
+            }
+        }
+        &.small {
+            >label {
+                right: auto;
+                top: 50%;
+                font-size: 11px;
+            }
+            >input {
+                padding: 8px 10px 0 10px
+            }
+            >i {
+                font-size: 12px;
+                line-height: 35px;
+            }
+            >a {
+                line-height: 52px;
+            }
+        }
+        &.right {
+            >input {
+                padding-right: 30px;
+            }
+            >i, >a {
+                width: 30px;
+            }
+        }
+        &.left {
+            >label {
+                left: 30px;
+            }
+            >input {
+                padding-left: 30px;
+            }
+            >i, >a {
+                width: 30px;
+            }
+        }
+    }
+    .textarea {
+        background-color: $color-f;
+        border: 1px solid $color-border;
+        label {
+            left: 5px;
+            right: auto;
+            top: 12px;
+        }
+        textarea {
+            border: none;
+            margin: 19px 0 10px 0;
+            padding: 0 10px 0 10px;
+            min-height: 2em;
+            overflow: hidden;
+        }
+        .tooltip.error {
+            margin-top: -2px;
+        }
+    }
+    &.focus {
+        input, textarea {
+            color: inherit;
+        }
+        .input, .textarea {
+            >label {
+                top: 0;
+                left: 5px;
+                right: auto;
+                transform: scale(0.8) translateY(0);
+                transform-origin: left;
+                width: 100%;
+            }
+        }
+        .input {
+            >i {
+                line-height: 52px;
+            }
+            &.small {
+                >label {
+                    top: -2px;
+                }
+                >i {
+                    line-height: 42px;
+                }
+            }
+            &.large {
+                >i {
+                    line-height: 65px;
+                }
+            }
+        }
+    }
+    .tooltip.error {
+        top: auto;
+        bottom: 0;
+        .tooltip-inner {
+            background: transparent !important;
+            border: none !important;
+        }
+    }
+}

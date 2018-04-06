@@ -1,0 +1,14 @@
+[data-img], [data-img-load], [data-src], [data-src-load] {}
+
+.data-img-load-success {
+    &:before, &.after {
+        display: none;
+    }
+}
+
+.data-img-load-error {
+    background-image: url('/images/noimg.gif');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
