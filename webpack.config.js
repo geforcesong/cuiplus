@@ -10,7 +10,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'public'),
         filename: `[name].${pkg.version}.js`,
-        publicPath: '/dist/'
+        publicPath: '/public/'
     },
     module: {
         rules: [
