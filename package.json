@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "concurrently \"webpack -d --watch\" \"light-server -s . -p 7000\" ",
+    "server": "light-server -s . -p 7000",
     "build": "webpack"
   },
   "repository": {
